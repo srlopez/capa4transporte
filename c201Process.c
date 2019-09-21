@@ -10,13 +10,10 @@
 
    - system()
    - execl()
-   - fork()
 
-
-   
 */
 
-#define EXECL //SYSTEM, EXECL
+#define SYSTEM //SYSTEM, EXECL
 
 int main(int arcg, char *argv[])
 {
@@ -47,12 +44,17 @@ Fin de programa....
 
     strcpy(cmdls, "find . -maxdepth 1 -type f >  ");
     strcat(cmdls, outfile);
+    
+    strcpy(cmderror, "notepad 2>>");
+    strcat(cmderror, outfile );
+    strcat(cmderror, " " );
+    strcat(cmderror, outfile );
+
     strcpy(cmdedit, "open -a TextEdit ");
     strcat(cmdedit, outfile);
-    strcpy(cmderror, "notepad  ");
-    strcat(cmderror, outfile);
-    strcpy(cmdrm, "( echo $$; echo $BASHPID );rm  ");
-    strcat(cmdrm, outfile);
+
+    // strcpy(cmdrm, "rm  ");
+    // strcat(cmdrm, outfile);
 
     printf("Ejemplo de uso de system():");
     printf("\n\tListado del directorio actual y envio a un fichero: ");
@@ -62,7 +64,7 @@ Fin de programa....
     printf("\n\tEste comando es erróneo: %d", system(cmderror));
     printf("%d", system(cmdrm)); // Borramos el archivo
 /*
-airbook:PSP01-Codigo santi$ gcc e1007System.c && ./a.out
+airbook:PSP01-Codigo santi$ gcc c201Process.c && ./a.out
 Ejemplo de uso de system():
         Listado del directorio actual y envio a un fichero: 0
 sh: gedit: command not found
@@ -76,12 +78,24 @@ airbook:PSP01-Codigo santi$
 #ifdef EXECL
     printf("Ejemplo de execl()\n");
 
-    printf("Los archivos en el directorio son:\n");
-    execl("/bin/ls", "ls", "-l", NULL);
+    printf("Busca el PID %d en la lista de procesos\n", pid_main);
+    execl("/bin/ps", "ps", "-la", NULL);
     printf("¡¡¡ Esta sentencia printf no se ejecuta !!!\n");
     //Ni ninguna más tras el execl
-#endif
 
+/*
+airbook:dampsp santi$ gcc c201Process.c;./a.out 
+PID: 750
+PPID: 319
+Ejemplo de execl()
+Busca el PID 750 en la lista de procesos
+  UID   PID  PPID        F CPU PRI NI       SZ    RSS WCHAN     S             ADDR TTY           TIME CMD
+ ...
+    0   750   319     4106   0  31  0  4268408   1000 -      R+                  0 ttys000    0:00.00 ps -la
+ ...
+ airbook:dampsp santi$ 
+*/
+#endif
 
 
     sleep(3);

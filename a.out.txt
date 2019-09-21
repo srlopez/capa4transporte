@@ -1,0 +1,11 @@
+./c202Threads.c
+./c101.2.c
+./c101.1.c
+./c201Process.c
+./c101.5.c
+./README.md
+./a.out
+./c101.4.c
+./a.out.txt
+./c101.3.c
+sh: notepad: command not found
