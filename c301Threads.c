@@ -4,13 +4,15 @@
 #include <string.h>
 
 /*
-airbook:PSP1 santi$ gcc c301Threads.c -lpthread; ./a.out
-A ver si acabas...
-Tenemos dos vidas:
- la segunda comienza cuando nos damos cuenta
- de que sólo tenemos una”. (Confucio)
-Thread done.
-mithread1 ya ha acabado.
+    Treads
+    Compartición de memoria
+    Códigos de error standard de unix
+
+    - pthread_t thread...
+    - pthread_create(&thread, NULL,....
+    - pthread_join(thread,....
+    - gcc -lpthread
+
 */
 
 struct sData
@@ -61,3 +63,14 @@ These are the standard error codes in Linux or UNIX.
     printf("mithread1 ya ha acabado con value a %d.\n", sd.value);
     return 0;
 }
+
+/* Salida de consola
+
+airbook:dampsp santi$ gcc c301Threads.c -lpthread; ./a.out
+Desde 1713 miro a ver si acabas...
+Tenemos dos vidas:
+ la segunda comienza cuando nos damos cuenta
+ de que sólo tenemos una”. (Confucio)
+Thread 1713 done.
+mithread1 ya ha acabado con value a 16.
+*/
