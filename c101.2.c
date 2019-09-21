@@ -4,8 +4,11 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h> //malloc
+#include <assert.h>  
 
 static int Twice(int num);
+char *MakeStringInHeap(const char *source);
 
 int main()
 {
@@ -171,6 +174,10 @@ loop:;
   // Comprobar pi--
   printf("pi=%p, i=%d\n", (void *)pi, *(pi - 1));
 
+  // --- funciones ---
+  // abajo
+  printf("Twice de %d = %d\n", 7, Twice(7));
+
   // ---- Strings + <strings.h>
   char string[1000];
   int len;
@@ -191,14 +198,28 @@ loop:;
     Tree smaller, larger; // idem "struct treenode *smaller, *larger"
   };
 
-  // --- funciones ---
-  // abajo
-  printf("Twice de %d = %d\n", 7, Twice(7));
+  /*
+https://es.wikibooks.org/wiki/Programaci%C3%B3n_en_C/Manejo_din%C3%A1mico_de_memoria
+void* malloc(size_t size) 
+void free(void* block) 
+void* realloc(void* block, size_t size);
+*/
+
+  int a[1000];
+  int *b;
+  b = (int *)malloc(sizeof(int) * 1000);
+  assert(b != NULL); // check
+  a[123] = 13;
+  b[123] = 13;
+  free(b);
+
+  char *str;
+  str = MakeStringInHeap("Hola Mundo C101!\0");
 
   //---- Punteros a funciones
   // ∫https://www.geeksforgeeks.org/function-pointer-in-c/
 
-  printf("Hello, World C101! \n");
+  printf("%s\n",str);
   return 0;
 }
 
@@ -209,6 +230,16 @@ static int Twice(int num)
   int result = num * 3;
   result = result - num;
   return (result);
+}
+
+char *MakeStringInHeap(const char *source)
+{
+  char *newString;
+  newString = (char *)malloc(strlen(source) + 1);
+  // +1 para el '\0'
+  assert(newString != NULL);
+  strcpy(newString, source);
+  return (newString);
 }
 
 // void, by value y by reference, const.
