@@ -34,7 +34,8 @@ void *newtask(void *_number)
   vars->number = number+1;
 
   printf ("THREAD: number = %d\n", vars->number);
-/* UNBLOCK */
+  
+  /* UNBLOCK */
   pthread_mutex_unlock(&mutex);
   /* UNBLOCK */
   pthread_exit(NULL);
