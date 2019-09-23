@@ -11,24 +11,26 @@
     - pthread_t thread...
     - pthread_create(&thread, NULL,....
     - pthread_join(thread,....
+    - pthread_exit(NULL);
     - gcc -lpthread
 
 */
 
 struct sData
 {
-    int  value;
+    int value;
     char text[1000];
 };
 
-void *start (void *voidData) {
+void *start(void *voidData)
+{
     struct sData *data = voidData;
     data->value = 16;
     sleep(2);
     printf("%s\n", data->text); // Ojo
     printf("Thread %d done.\n", getpid());
 
-    return 0;
+    pthread_exit(0);
 }
 
 int main(void)
@@ -37,13 +39,13 @@ int main(void)
     struct sData sd;
     int rc;
 
-    strcpy (sd.text, "Tenemos dos vidas:\n la segunda comienza cuando nos damos cuenta\n de que sólo tenemos una”. (Confucio)");
+    strcpy(sd.text, "Tenemos dos vidas:\n la segunda comienza cuando nos damos cuenta\n de que sólo tenemos una”. (Confucio)");
     rc = pthread_create(&thread, NULL, start, &sd);
 
     if (rc)
     {
         printf("mithread1 error: %d", rc);
-/*
+        /*
 These are the standard error codes in Linux or UNIX.
 
 1 - Catchall for general errors
@@ -61,7 +63,7 @@ These are the standard error codes in Linux or UNIX.
     printf("Desde %d miro a ver si acabas...\n", getpid());
     pthread_join(thread, NULL);
     printf("mithread1 ya ha acabado con value a %d.\n", sd.value);
-    return 0;
+    pthread_exit(0);
 }
 
 /* Salida de consola

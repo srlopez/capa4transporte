@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h> //malloc
-#include <assert.h>  
+#include <assert.h>
 
 static int Twice(int num);
 char *MakeStringInHeap(const char *source);
@@ -219,7 +219,24 @@ void* realloc(void* block, size_t size);
   //---- Punteros a funciones
   // ∫https://www.geeksforgeeks.org/function-pointer-in-c/
 
-  printf("%s\n",str);
+
+  // Sobreescritura 'errónea' de un fin de string
+  struct sobreescritura
+  {
+    char stra[14];
+    char strb[15];
+  } test;
+
+  strcpy(test.stra, "C Programming");
+  strcpy(test.strb, "by Brian"); // W. Kernighan and Dennis M. Ritchie");
+
+  printf("Antes--> \"%s\" (%lu)\n", test.stra, strlen(test.stra));
+  char *p = test.stra + strlen(test.stra); //<- la dirección final de stra
+  *p = '*';                                //<- y la sobreeescribimos
+  printf("Después> \"%s\" (%lu)\n", test.stra, strlen(test.stra));
+
+  printf("%s\n", str);
+  free(str);
   return 0;
 }
 
