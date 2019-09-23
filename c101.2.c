@@ -181,7 +181,7 @@ loop:;
   // ---- Strings + <strings.h>
   char string[1000];
   int len;
-  strcpy(string, "Tenemos dos vidas, y la segunda comienza cuando te das cuenta que sólo tienes una.");
+  strcpy(string, "Tenemos dos vidas,\n y la segunda comienza cuando te das cuenta\n que sólo tienes una.");
   len = strlen(string);
   printf("\"%s\"\ntiene %d carácteres\n", string, len);
 
@@ -214,10 +214,10 @@ void* realloc(void* block, size_t size);
   free(b);
 
   char *str;
-  str = MakeStringInHeap("Hola Mundo C101!\0");
+  str = MakeStringInHeap("Hola Mundo C101! desde el Heap\0");
 
   //---- Punteros a funciones
-  // ∫https://www.geeksforgeeks.org/function-pointer-in-c/
+  // https://www.geeksforgeeks.org/function-pointer-in-c/
 
 
   // Sobreescritura 'errónea' de un fin de string
@@ -234,9 +234,13 @@ void* realloc(void* block, size_t size);
   char *p = test.stra + strlen(test.stra); //<- la dirección final de stra
   *p = '*';                                //<- y la sobreeescribimos
   printf("Después> \"%s\" (%lu)\n", test.stra, strlen(test.stra));
+  p  = p - 7; //<- cambiamos el puntero
+  *p = 0;     //<- finalizamos el string
+  printf("y más--> \"%s\" (%lu)\n", test.stra, strlen(test.stra));
+
 
   printf("%s\n", str);
-  free(str);
+  free(str); //<- espacio de memoria creado en la pila. Lo liberamos
   return 0;
 }
 
