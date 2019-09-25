@@ -29,17 +29,31 @@ int main()
   /* --- printf ----
 https://es.wikipedia.org/wiki/Printf
 
-%d ó %i	entero en base 10 con signo (int)
-%u	entero en base 10 sin signo (int)
-%o	entero en base 8 sin signo (int)
-%x	entero en base 16, letras en minúscula (int)
-%X	entero en base 16, letras en mayúscula (int)
-%f	Coma flotante decimal de precisión simple (float)
-%lf	Coma flotante decimal de precisión doble (double)
-%e	La notación científica (mantisa / exponente), minúsculas (decimal precisión simple ó doble)
-%E	La notación científica (mantisa / exponente), mayúsculas (decimal precisión simple ó doble)
-%c	caracter (char)
-%s	cadena de caracteres (string)
+DATA TYPE	   MEMORY   RANGE                     FORMAT
+            (BYTES)		                          SPECIFIER
+short int	    2	    -32,768 	                  %hd
+                    32,767
+unsigned short int	2	0                         %hu
+                    65,535	              
+unsigned int	4	    0 	                        %u
+                    4,294,967,295
+int	          4	    -2,147,483,648            	%d
+                    2,147,483,647
+long int	    4	    -2,147,483,648            	%ld
+                    2,147,483,647
+unsigned long int	4	0                 	        %lu
+                    4,294,967,295
+long long int	8	    -(2^63)           	        %lld
+                    (2^63)-1
+unsigned long long int	8	0                     %llu
+                    18,446,744,073,709,551,615	
+signed char	  1	    -128      	                %c
+                    127
+unsigned char	1	    0     	                    %c
+                    255
+float	        4		                              %f
+double	      8		                              %lf
+long double	  12		                            %Lf
 */
 
   // --- control de flujo ---
