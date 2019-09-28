@@ -3,6 +3,6 @@
 
 int main()
 {
-    printf("Hello, World! \n");
+    printf("Hello, World! from Windows \n");
     return 0;
 }
