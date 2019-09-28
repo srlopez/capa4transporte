@@ -12,7 +12,8 @@
     - pthread_create(&thread, NULL,....
     - pthread_join(thread,....
     - pthread_exit(NULL);
-    - gcc -lpthread
+
+    - gcc c301Threads.c -lpthread; ./a.out
 
 */
 
