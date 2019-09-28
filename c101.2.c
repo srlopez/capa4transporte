@@ -10,6 +10,11 @@
 static int Twice(int num);
 char *MakeStringInHeap(const char *source);
 
+void fun(int a) 
+{ 
+    printf("El contenido de a es: %d\n", a); 
+}
+
 int main()
 {
   // --- Declaración de varibles Enteros ---
@@ -232,6 +237,18 @@ void* realloc(void* block, size_t size);
 
   //---- Punteros a funciones
   // https://www.geeksforgeeks.org/function-pointer-in-c/
+ 
+   
+    // fun_ptr es un puntero a la función fun()  
+    void (*fun_ptr)(int) = &fun; 
+  
+    /* La declaración anteriro es equivalente a
+       void (*fun_ptr)(int); 
+       fun_ptr = &fun;  
+    */
+  
+    // Invocamos fun() usando el puntero fun_ptr 
+    (*fun_ptr)(10); 
 
 
   // Sobreescritura 'errónea' de un fin de string
@@ -277,6 +294,4 @@ char *MakeStringInHeap(const char *source)
   return (newString);
 }
 
-// void, by value y by reference, const.
-// Hacer ejemplo swap
-// Hacer ejemplo num primo
+
