@@ -1,3 +1,14 @@
+/*
+
+airbook:java santi$ javac SimpleThreads.java
+airbook:java santi$ java SimpleThreads
+main: Starting MessageLoop thread
+main: Waiting for MessageLoop thread to finish
+main: Still waiting...
+
+*/
+
+
 public class SimpleThreads {
 
     // Display a message, preceded by
