@@ -5,8 +5,8 @@ airbook:java santi$ java Mayusculas
 hola amigo
 [HOLA AMIGO]
 desde java a c y vuelta en mayusculas
-[DESDE JAVA A C Y VUELTA EN MAYUSCULAS]
-Finalizando
+[DESDE JAVA A C Y VUELTA EN MAYUSCULAS] 
+^DFinalizando
 airbook:java santi$ 
 
 */
@@ -25,7 +25,7 @@ public class Mayusculas {
         // Finaliza la entrada
         while ((line = in.readLine()) != null) {
             ps.println(line);
-            ps.flush(); // IMP: Comprueba envío de datos
+            ps.flush(); // vacía el buffer
             if ((line = br.readLine()) != null) 
                 System.out.println("["+line+"]");
         }
