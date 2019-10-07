@@ -28,8 +28,9 @@ public class ComunicationBetweenProcess {
         String line;
         System.out.println("Salida del proceso " + Arrays.toString(args) + ":");
         while ((line = br.readLine()) != null) {
-            System.out.println(line);
+            System.out.println("["+line+"]");
         }
+        is.close();
     }
 
 }

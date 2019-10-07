@@ -17,9 +17,9 @@ int main(int argc, char **argv)
     int i;
     while(fgets(buf, 1024, stdin) != NULL) {
         longitud = strlen(buf);
-        for( i = 0; i < longitud; i++) {
+        for( i = 0; i < longitud; i++) 
             buf[i] = toupper(buf[i]);
-        }
+        
         fputs(buf, stdout);
         fflush(stdout); 
     }
