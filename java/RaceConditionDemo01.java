@@ -1,9 +1,14 @@
+import java.util.Random;
+
+
+
 class Counter  implements Runnable{
     private int c = 0;
+    Random rand = new Random();
 
     public void increment() {
         try {
-            Thread.sleep(10);
+            Thread.sleep(100);//rand.nextInt(10));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -18,25 +23,25 @@ class Counter  implements Runnable{
         return c;
     }
     
-    @Override
+    //@Override
     public void run() {
-        //++
-        this.increment();
-        System.out.println("Contador= "+ this.getValue() + " en "
-        + Thread.currentThread().getName() + " tras INC" );
-        //--
-        this.decrement();
-        System.out.println("VContador= "+ this.getValue() + " en "
-        + Thread.currentThread().getName() + " tras DEC" );
+        //synchronized(this){
+            //++
+            this.increment();
+            System.out.println("Thread" + Thread.currentThread().getName() + "(+)= " + this.getValue());
+            //--
+            this.decrement();
+            System.out.println("Thread" + Thread.currentThread().getName() + "(-)= " + this.getValue());
+        //}
     }
 }
 
 public class RaceConditionDemo01{
     public static void main(String[] args) {
         Counter counter = new Counter();
-        Thread t1 = new Thread(counter, "Thread-1");
-        Thread t2 = new Thread(counter, "Thread-2");
-        Thread t3 = new Thread(counter, "Thread-3");
+        Thread t1 = new Thread(counter, "#1");
+        Thread t2 = new Thread(counter, "#2");
+        Thread t3 = new Thread(counter, "#3");
         t1.start();
         t2.start();
         t3.start();
