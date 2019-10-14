@@ -26,7 +26,7 @@ void *newtask(void *_number)
   longTask();
   vars->number = number+1;
 
-  printf ("THREAD: number = %d\n", vars->number);
+  printf ("THREAD id = %d\n", vars->number);
 
   pthread_exit(NULL);
 }
@@ -40,20 +40,20 @@ int main (int argc, char *argv[])
 
    vars->number = 0;
 
-   printf ("Main process just started.\n");
+   printf ("Main recien empezado.\n");
    for (i=0; i<10; ++i)
      {
        rc = pthread_create(&thread, NULL, newtask, vars);
        if (rc)
      {
-       printf("ERROR in pthread_create(): %d\n", rc);
+       printf("ERROR en pthread_create(): %d\n", rc);
        exit(-1);
      }
      }
 
   longTask();
 
-   printf ("Main process about to finish.\n");
+   printf ("Main a punto de acabar.\n");
    /* Last thing that main() should do */
    pthread_exit(NULL);
 }
