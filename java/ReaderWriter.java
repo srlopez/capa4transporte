@@ -1,13 +1,12 @@
 /*
 RAMA Problema propuesto
 
-Escribe una clase llamada Check que cree dos threads 
-que accedan simultáneamente a un buffer de 10.000 enteros. 
+Escribe una clase llamada ReaderWriter que cree dos threads 
+que accedan simultáneamente a un buffer de 10.000 (args 0) enteros. 
 Uno de ellos lee en el buffer y el otro escribe en el mismo. 
 
-El thread escritor debe escribir el mismo valor en todos 
-los elementos del buffer incrementando
-en uno el valor en cada pasada. 
+Indefinidamente, ( o args 2) el thread escritor debe escribir el mismo valor (o no) en todos 
+los elementos del buffer incrementando en uno el valor en cada pasada. 
 
 El thread lector debe ir comprobando que todos los números
 del buffer son iguales, mostrando un mensaje de error 
@@ -16,7 +15,7 @@ en caso contrario o un mensaje de
 
 
 El código a realizar utilizará un monitor para acceder
-al buffer si se indica un parámetro al ejecutar el programa. 
+al buffer si se indica un parámetro (args 1) al ejecutar el programa. 
 En caso contrario, los threads
 accederán al buffer sin hacer uso del monitor.
 
