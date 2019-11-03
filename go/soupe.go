@@ -40,7 +40,7 @@ func f1(id int) {
 				}
 			})()
 			mutex.Lock()
-			fmt.Println("----", c, "----")
+			fmt.Println("           ", c)
 			l2[i] = string(msg.c)[0]
 			fmt.Println(l1)
 			fmt.Println(fmt.Sprintf("%s", l2))
@@ -64,16 +64,13 @@ func f1(id int) {
 			select {
 			case <-status[(id+2)%5]:
 				h = (id + 2) % 5
-				messages[h] <- T{id, cuchara} //fmt.Sprintf("%d%s%d", id, cuchara, h)
-				status[h] <- <-status[h]
 			case <-status[(id+3)%5]:
 				h = (id + 3) % 5
-				messages[h] <- T{id, cuchara} //fmt.Sprintf("%d%s%d", id, cuchara, h)
-				status[h] <- <-status[h]
-
 			default:
 			}
-
+			//fmt.Println(h)
+			messages[h] <- T{id, cuchara}
+			status[h] <- <-status[h]
 			cubiertos <- cuchara
 
 		default:
@@ -100,7 +97,7 @@ func main() {
 	for w := 0; w <= 4; w++ {
 		go f1(w)
 	}
-	for atomic.LoadInt32(&cantidad) > 0 {
+	for atomic.LoadInt32(&cantidad) > 0 { //Mala sincronización
 	}
 	fmt.Println("end")
 
