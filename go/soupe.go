@@ -25,7 +25,7 @@ var l3 string = "0011223344"
 
 var mutex = &sync.Mutex{}
 
-func f1(id int) {
+func f(id int) {
 	for {
 
 		// Si tengo mensajes me los como
@@ -46,10 +46,11 @@ func f1(id int) {
 			fmt.Println(fmt.Sprintf("%s", l2))
 			fmt.Println(l3)
 			mutex.Unlock()
+
 			time.Sleep(time.Second) //Comiendo
+
 			mutex.Lock()
 			l2[i] = '.'
-
 			mutex.Unlock()
 
 			status[id] <- "ready"
@@ -74,11 +75,10 @@ func f1(id int) {
 			cubiertos <- cuchara
 
 		default:
-
 		}
 
 	}
-	fmt.Println("worker", id, "exit")
+	fmt.Println("f", id, "exit")
 
 }
 
@@ -95,9 +95,10 @@ func main() {
 	}
 
 	for w := 0; w <= 4; w++ {
-		go f1(w)
+		go f(w)
 	}
 	for atomic.LoadInt32(&cantidad) > 0 { //Mala sincronización
+		//refactoring
 	}
 	fmt.Println("end")
 
