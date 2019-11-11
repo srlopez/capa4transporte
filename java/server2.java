@@ -49,7 +49,7 @@ public class server2 implements Runnable{
 
         PrintWriter out = null;
 
-
+        System.out.println("Cliente: "+connect.getRemoteSocketAddress().toString());
         try {
             in = new BufferedReader(new InputStreamReader(connect.getInputStream()));
             out = new PrintWriter(connect.getOutputStream());
