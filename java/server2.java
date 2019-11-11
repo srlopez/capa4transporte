@@ -13,10 +13,10 @@ import java.util.Date;
 //import java.util.stream.Collectors;
 
 
-public class server implements Runnable{ 
+public class server2 implements Runnable{ 
     private Socket connect;
 
-    public server(Socket client) {
+    public server2(Socket client) {
         connect = client;
     }
     
@@ -29,7 +29,7 @@ public class server implements Runnable{
             System.out.println("escuchando en: " + port + "\n");
             
             while (true) {
-                server miServer = new server(escucha.accept());
+                server2 miServer = new server2(escucha.accept());
                 System.out.println("accept en (" + new Date() + ")");
 
                 // y se auto duplica cada vez que se acepta una conexión
@@ -54,35 +54,23 @@ public class server implements Runnable{
             in = new BufferedReader(new InputStreamReader(connect.getInputStream()));
             out = new PrintWriter(connect.getOutputStream());
 
-            String input = in.readLine();
+            for( int i=0; i<5;i++){
+ 
+                String input = in.readLine();
 
-            // Muchas clases para parsear la primera linea
-            // StringTokenizer parse = new StringTokenizer(input);
-            // String method = parse.nextToken().toUpperCase(); 
-            // request = parse.nextToken().toLowerCase();
-            // System.out.println(method +": " + request );
+                //do {
+                    System.out.println("Recibo: "+input );
+                //} while ((input = in.readLine()) != null); 
 
-            // OJO: Si activo el bucle, la página 
-            // se queda esperando a localhost .... y
-            // acaba dando ERR_EMPTY_RESPONSE cuando cierro
-            // el server
-
-            // do {
-                 System.out.println(input );
-            // } while ((input = in.readLine()) != null); 
-
-            //a lo facil para escribir
-            out.println("HTTP/1.1 200 ");
-            out.println("Content-Type: text/html"); //text/plain
-            out.println("Connection: closed");
-            out.println("");
-            out.println ("<p style='font-family:courier;font-size:160%;'>"+input+  "(" + new Date() + ")</p>");
-            out.flush();
-
-
+                //a lo facil para escribir
+                out.println ( Integer.valueOf(input)*i);
+                out.flush();
+            }
+           
             in.close();
             out.close();
             connect.close(); 
+ 
         } catch (IOException ioe) {
             System.err.println(ioe);
         } 
