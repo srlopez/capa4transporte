@@ -24,25 +24,21 @@ public class server2client {
             String ip = args[0];
             int port = Integer.valueOf(args[1]);
 
-            System.out.println("a");
-
             Socket s = new Socket();
-            System.out.println("b");
-
-            System.out.println(ip+ ":"+ port + "\n");
-            InetSocketAddress server = new InetSocketAddress(ip, port);
-
             InputStream is = null;
             BufferedReader in = null; 
             PrintWriter out = null;
 
+            System.out.println("Mi server en:" +ip+ ":"+ port + "\n");
+            InetSocketAddress server = new InetSocketAddress(ip, port);
+
+
             s.connect(server);
             System.out.println("connect en (" + new Date() + ")");
+
             is = s.getInputStream();
             in = new BufferedReader(new InputStreamReader(is));
             out = new PrintWriter(s.getOutputStream());
-
-
 
             for(int i=0; i<5; i++){
                
@@ -52,7 +48,11 @@ public class server2client {
                      out.flush();
 
                     // Respuesta del servidor
+                    // Importante: Si escribo en Printer/Leo Line a Line
                     String input = in.readLine();
+
+                    // Si escribo en buffer leo N bytes
+                    // es más facil leer y escribir en lines
                     //byte[] msg = new byte[256];
                     //is.read(msg);
                     //String input = new String(msg) ;
