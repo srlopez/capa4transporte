@@ -51,20 +51,21 @@ public class server2 implements Runnable{
 
         System.out.println("Cliente: "+connect.getRemoteSocketAddress().toString());
         try {
+            String input, input2 = null; 
             in = new BufferedReader(new InputStreamReader(connect.getInputStream()));
             out = new PrintWriter(connect.getOutputStream());
 
-            for( int i=0; i<5;i++){
- 
-                String input = in.readLine();
-
+            input = in.readLine(); 
+            while(input.compareTo("END")!=0){
                 //do {
                     System.out.println("Recibo: "+input );
                 //} while ((input = in.readLine()) != null); 
 
-                //a lo facil para escribir
-                out.println ( Integer.valueOf(input)*i);
+                input2 = in.readLine();
+                System.out.println("Recibo: "+input2 );
+                out.println ( "=="+input+"=="+input2 +"====");
                 out.flush();
+                input = in.readLine(); 
             }
            
             in.close();

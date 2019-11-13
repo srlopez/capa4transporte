@@ -47,6 +47,9 @@ public class server2client {
                      out.println(i);
                      out.flush();
 
+                     out.println(i*10);
+                     out.flush();
+
                     // Respuesta del servidor
                     // Importante: Si escribo en Printer/Leo Line a Line
                     String input = in.readLine();
@@ -59,9 +62,10 @@ public class server2client {
                     //do {
                          System.out.println(input );
                     //} while ((input = in.readLine()) != null); 
-
-
             }
+            out.println("END");
+            out.flush();
+
             in.close();
             out.close();
             s.close();
