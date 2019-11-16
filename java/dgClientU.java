@@ -22,6 +22,11 @@ public class dgClientU implements Runnable {
       new Thread(new dgClientU()).start();
    }
 
+   // Cliente que recibe un mensaje de un server
+   // El cliente (este) debe estar esperando
+   // El server no espera la conexión así que escribe y cierra la conexión
+   // Sólo puede haber un cliente escuchando en la misma puerta por host
+
    public void recibir(String ip, int port) throws IOException {
       byte[] buffer=new byte[SIZE];
       String msg;
@@ -30,7 +35,7 @@ public class dgClientU implements Runnable {
       InetSocketAddress addr = new InetSocketAddress(IP,PORT);
       DatagramSocket socket = new DatagramSocket(addr);
       
-      System.out.println("esperando al fin ...");
+      System.out.println("esperando a "+FIN+" ...");
       do{
          DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
          socket.receive(packet);

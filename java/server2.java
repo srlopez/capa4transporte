@@ -21,6 +21,10 @@ public class server2 implements Runnable{
     }
     
     //Arranca el proceso
+    // En una consola      java server2 3333      
+    // En otra consola     java server2client localhost 3333
+    //                     java server2client 127.0.0.1 3333
+    //                     java server2client 192.168.0.13 3333
     public static void main(String[] args) {
         try {
             int port = Integer.valueOf(args[0]);

@@ -14,8 +14,8 @@ public static final String FIN = "fin";
       System.out.println(">> "+str);
 
       byte[] msg = str.getBytes();
-      InetAddress group = InetAddress.getByName(ipAddress);
-      DatagramPacket packet = new DatagramPacket(msg, msg.length, group, port);
+      InetAddress ip = InetAddress.getByName(ipAddress);
+      DatagramPacket packet = new DatagramPacket(msg, msg.length, ip, port);
 
       DatagramSocket socket = new DatagramSocket();
       socket.send(packet);
@@ -23,8 +23,15 @@ public static final String FIN = "fin";
    
     }
 
+    // En una consola    java dgServer CualquierParam=localhost
+    // escribe mensajes y el ultimo 
+    // mensaje es un 'FIN'
+    // No importa que no le escuchen
    public static void main(String[] args) throws IOException {
-      if (args.length>0) { IP="localhost"; } //Unicast
+      if (args.length>0) { 
+         //IP=args[0];
+         IP="localhost"; 
+      } //Unicast  Si paso un parametro es IP Multicast
       System.out.println("| "+IP+" |");
       do{
         send("mensaje i", IP, PORT);
