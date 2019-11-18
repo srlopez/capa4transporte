@@ -45,7 +45,7 @@ public class server2client {
                      //a lo facil para escribir
                      // Mensaje de ida
                      out.println(i);
-                     out.flush();
+                     //out.flush();
 
                      out.println(i*10);
                      out.flush();
