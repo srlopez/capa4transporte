@@ -33,9 +33,11 @@ public static final String FIN = "fin";
          IP="localhost"; 
       } //Unicast  Si paso un parametro es IP Multicast
       System.out.println("| "+IP+" |");
+      int i = 0;
       do{
-        send("mensaje i", IP, PORT);
-      }while(1==2);
+        send("mensaje "+i, IP, PORT);
+        i++;
+      }while(i<100000);
       send(FIN, IP, PORT);
    }
 }
