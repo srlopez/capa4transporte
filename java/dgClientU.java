@@ -12,13 +12,17 @@ public class dgClientU implements Runnable {
 224.0.1.0	238.255.255.255	Internet
 239.0.0.0	239.255.255.255	local
 */
-   public static final String IP = "localhost";
+   public static  String IP = "localhost";
    public static final int PORT = 4567;
    public static final String FIN = "fin";
    public static final int SIZE = 1024;// 1K máximo creo! 64K de paquete
 
    public static void main(String[] args) {
       System.out.println("UNICAST");
+      if (args.length>0) { 
+         IP=args[0];
+         //IP="localhost"; 
+      } 
       new Thread(new dgClientU()).start();
    }
 
