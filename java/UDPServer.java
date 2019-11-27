@@ -5,7 +5,7 @@ import java.net.InetAddress;
 import java.net.SocketException;
 public class UDPServer {
     private DatagramSocket udpSocket;
-    private int port;
+    private int port; 
  
     public UDPServer(int port) throws SocketException, IOException {
         this.port = port;
@@ -26,6 +26,11 @@ public class UDPServer {
             
             System.out.println(
                 "Message from " + packet.getAddress().getHostAddress() + ": " + msg);
+            
+            DatagramPacket p = new DatagramPacket(
+                msg, msg.length, packet.getAddress().getHostAddress(), port);
+                
+            this.udpSocket.send(p);      
         }
     }
     

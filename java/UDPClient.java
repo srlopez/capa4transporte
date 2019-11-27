@@ -17,7 +17,7 @@ public class UDPClient {
     public static void main(String[] args) throws NumberFormatException, IOException {        
         UDPClient sender = new UDPClient(args[0], Integer.parseInt(args[1]));
         System.out.println("-- Running UDP Client at " + InetAddress.getLocalHost() + " --");
-        sender.start();
+        sender.start(); 
     }
     private int start() throws IOException {
         String in;
@@ -27,7 +27,17 @@ public class UDPClient {
             DatagramPacket p = new DatagramPacket(
                 in.getBytes(), in.getBytes().length, serverAddress, port);
             
-            this.udpSocket.send(p);                    
+            this.udpSocket.send(p); 
+            //====== 
+            String msg;
+            this.udpSocket.receive(packet);
+            msg = new String(packet.getData()).trim();
+            
+            System.out.println(
+                "Message from " + packet.getAddress().getHostAddress() + ": " + msg);
+            //=====
+            
+
         }
     }
 }
