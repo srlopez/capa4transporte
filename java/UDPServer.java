@@ -26,11 +26,15 @@ public class UDPServer {
             
             System.out.println(
                 "Message from " + packet.getAddress().getHostAddress() + ": " + msg);
-            
-            DatagramPacket p = new DatagramPacket(
-                msg, msg.length, packet.getAddress().getHostAddress(), port);
+            //=====
+            DatagramPacket p = new DatagramPacket( 
+                msg.getBytes(), 
+                msg.length(), 
+                packet.getAddress(),
+                port);
                 
-            this.udpSocket.send(p);      
+            udpSocket.send(p);
+            //=====      
         }
     }
     
