@@ -29,6 +29,8 @@ public class UDPClient {
             
             this.udpSocket.send(p); 
             //====== 
+            byte[] buf = new byte[256];
+            DatagramPacket packet = new DatagramPacket(buf, buf.length);
             String msg;
             this.udpSocket.receive(packet);
             msg = new String(packet.getData()).trim();
