@@ -6,10 +6,12 @@ import java.net.SocketException;
 public class UDPServer {
     private DatagramSocket udpSocket;
     private int port; 
+    private InetAddress ipMulticast;
  
     public UDPServer(int port) throws SocketException, IOException {
         this.port = port;
         this.udpSocket = new DatagramSocket(this.port);
+        this.ipMulticast = InetAddress.getByName("239.0.0.1");
     }
     private void listen() throws Exception {
         System.out.println("-- Running Server at " + InetAddress.getLocalHost() + "--");
@@ -30,7 +32,7 @@ public class UDPServer {
             DatagramPacket p = new DatagramPacket( 
                 msg.getBytes(), 
                 msg.length(), 
-                packet.getAddress(),
+                this.ipMulticast,//packet.getAddress(),               
                 port);
                 
             udpSocket.send(p);
