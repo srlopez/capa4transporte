@@ -7,10 +7,13 @@ public class UDPServer {
     private DatagramSocket udpSocket;
     private int port; 
     private InetAddress ipMulticast;
+    private DatagramSocket MSocket;
+
  
     public UDPServer(int port) throws SocketException, IOException {
         this.port = port;
         this.udpSocket = new DatagramSocket(this.port);
+        this.MSocket = new DatagramSocket();
         this.ipMulticast = InetAddress.getByName("239.0.0.1");
     }
     private void listen() throws Exception {
@@ -35,7 +38,7 @@ public class UDPServer {
                 this.ipMulticast,//packet.getAddress(),               
                 port+1);
                 
-            udpSocket.send(p);
+            MSocket.send(p);
             //=====      
         }
     }
