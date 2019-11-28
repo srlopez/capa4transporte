@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.MulticastSocket;
 import java.net.InetAddress;
 import java.util.Scanner;
 
@@ -10,16 +9,11 @@ public class UDPClient {
     private InetAddress serverAddress;
     private int port;
     private Scanner scanner;
-    private InetAddress ipMulticast;
-    private MulticastSocket MSocket;
+
 
     private UDPClient(String destinationAddr, int port) throws IOException {
         this.serverAddress = InetAddress.getByName(destinationAddr);
         this.port = port;
-        this.ipMulticast = InetAddress.getByName("239.0.0.1");
-        this.MSocket = new MulticastSocket(this.port+1);
-        this.MSocket.joinGroup(this.ipMulticast);
-
         this.udpSocket = new DatagramSocket(this.port);
         this.scanner = new Scanner(System.in);
     }
@@ -37,11 +31,12 @@ public class UDPClient {
                 in.getBytes(), in.getBytes().length, serverAddress, port);
             
             this.udpSocket.send(p); 
+
             //====== 
             byte[] buf = new byte[256];
             DatagramPacket packet = new DatagramPacket(buf, buf.length);
             String msg;
-            this.MSocket.receive(packet);
+            this.udpSocket.receive(packet);
             msg = new String(packet.getData()).trim();
             
             System.out.println(

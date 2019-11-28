@@ -35,6 +35,14 @@ public class UDPServer {
             DatagramPacket p = new DatagramPacket( 
                 msg.getBytes(), 
                 msg.length(), 
+                packet.getAddress(),               
+                port);
+                
+            udpSocket.send(p);
+            
+            p = new DatagramPacket( 
+                msg.getBytes(), 
+                msg.length(), 
                 this.ipMulticast,//packet.getAddress(),               
                 port+1);
                 
