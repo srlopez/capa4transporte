@@ -17,7 +17,7 @@ public class UDPClient {
         this.serverAddress = InetAddress.getByName(destinationAddr);
         this.port = port;
         this.ipMulticast = InetAddress.getByName("239.0.0.1");
-        this.MSocket = new MulticastSocket(this.port);
+        this.MSocket = new MulticastSocket(this.port+1);
         this.MSocket.joinGroup(this.ipMulticast);
 
         this.udpSocket = new DatagramSocket(this.port);

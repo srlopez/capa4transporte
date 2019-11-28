@@ -33,7 +33,7 @@ public class UDPServer {
                 msg.getBytes(), 
                 msg.length(), 
                 this.ipMulticast,//packet.getAddress(),               
-                port);
+                port+1);
                 
             udpSocket.send(p);
             //=====      
