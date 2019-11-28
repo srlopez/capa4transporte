@@ -11,7 +11,7 @@ public class dgClientM implements Runnable {
 */
 
    public static String IP = "239.0.0.1"; //Multicast
-   public static final int PORT = 4567;
+   public static int PORT = 4567;
    public static final String FIN = "fin";
    public static final int SIZE = 1024;// 1K, máximo 64K de paquete
 
@@ -20,6 +20,9 @@ public class dgClientM implements Runnable {
    // de mensajes hasta que recibe el fin
 
    public static void main(String[] args) {
+      if (args.length>0) { 
+         PORT= Integer.parseInt(args[0]);
+      } //Unicast  Si paso un parametro es IP Multicast
       System.out.println("MULTICAST");
       new Thread(new dgClientM()).start();
    }
