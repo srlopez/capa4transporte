@@ -39,11 +39,11 @@ public class server implements Runnable{
     }
     
 
-    //Arranca el proceso
-    // En una consola      java server 3333      
-    // En otra consola     java client localhost 3333
-    //                     java client 127.0.0.1 3333
-    //                     java client 192.168.0.13 3333
+    // Arrancar el proceso
+    // En una consola      java server (4444)     
+    // En otra consola     java client                en la misma máquina 
+    //                     java client 4444 ipserver  en otro equipo
+
     public static void main(String[] args) {
         try {
             int port = args.length == 0? 4444: Integer.valueOf(args[0]);
