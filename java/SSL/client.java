@@ -45,12 +45,19 @@ public class client {
             out = new PrintWriter(socket.getOutputStream());
 
             while(input.compareTo("BYE BYE")!=0){
-                System.out.println("Mensaje: (END para acabar)" );
+                System.out.print("\n$ Mensaje ('END' para acabar)> " );
+                out.flush();
                 out.println(keyboard.readLine());
                 out.flush();
 
-                input = in.readLine();
-                System.out.println(input);
+                try {
+                    input = in.readLine();
+                } catch (Exception e) {
+                    input = "BYE BYE";
+                    System.out.println("OMG!!! ME HAN ECHADO!!!");
+                }
+
+                System.out.println(input.replace("@@", "\n"));
             }
 
             in.close();
