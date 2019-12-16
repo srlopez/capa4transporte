@@ -39,8 +39,8 @@ public class client {
 
             System.out.println("CLIENT connect en (" + new Date() + ")");
 
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
-            keyboard = new BufferedReader(new InputStreamReader(System.in, "UTF-8"));
+            in = new BufferedReader(new InputStreamReader(socket.getInputStream(), "ISO-8859-1"));
+            keyboard = new BufferedReader(new InputStreamReader(System.in, "ISO-8859-1"));
 
             out = new PrintWriter(socket.getOutputStream());
 

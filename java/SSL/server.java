@@ -147,7 +147,7 @@ public class server implements Runnable{
         System.out.println("SERVER accept: "+ip);
         try {
             String input = null; 
-            in = new BufferedReader(new InputStreamReader(connect.getInputStream(),"UTF-8"));
+            in = new BufferedReader(new InputStreamReader(connect.getInputStream(),"ISO-8859-1"));
             out = new PrintWriter(connect.getOutputStream());
 
             input = in.readLine(); 
