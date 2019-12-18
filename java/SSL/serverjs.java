@@ -151,14 +151,15 @@ public class serverjs implements Runnable{
         System.out.println("SERVER accept: "+ip);
         try {
             String input = null; 
-            in = new BufferedReader(new InputStreamReader(connect.getInputStream(),encoding));
+            in = new BufferedReader(new InputStreamReader(connect.getInputStream()));//,encoding));
             out = new PrintWriter(connect.getOutputStream());
 
             input = in.readLine(); 
             while(input.compareTo("END")!=0){
                 System.out.println("SERVER input: "+input+" ("+ip+")");
 
-                out.println (new String(map[random.nextInt(map.length)].getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1));
+                //out.println (new String(map[random.nextInt(map.length)].getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1));
+                out.println (map[random.nextInt(map.length)]);
                 out.flush();
                 input = in.readLine(); 
             }
