@@ -11,7 +11,7 @@ client.connect(4444, '127.0.0.1', function () {
     //client.setEncoding('binary');
     console.log('Connected');
     client.write('Saludos soy tu cliente\n');
-    client.write('Tú quien eres áéí\n');
+    client.write('Tú quien eres áéíóú\n');
     client.write('END\n');
 });
 
