@@ -1,0 +1,26 @@
+Lanzamos el servidor indocando el puerto
+
+dotnet run --project servidor 11111
+
+que espera un texto que puede ser de varias linneas pero siempre acaba en <EOF>, y desconecta la sesion del cliente
+El progrma no crea hilos para tratar conecxiones permanetes.
+
+dotnet run --project servidor 2222
+Waiting connection in port 2222 ...
+RemoteEndPoint 127.0.0.1:62448
+Text received ->
+Santi Client
+Line2
+<EOF>
+Waiting connection in port 2222 ...
+
+
+
+y el cliente invocando a que servidor y puerto se conecta
+
+dotnet run --project cliente 127.0.0.1 2222
+
+Socket connected to -> 127.0.0.1:2222
+Message from Server -> Test Server y Santi Client
+Line2
+<EOF>

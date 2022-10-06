@@ -1,0 +1,11 @@
+Compilar y Lanzar el servidor UDP
+javac Servidor.javac
+java Servidor
+
+En el cliente
+javac Cliente.java
+java Cliente (id)
+
+El cliente hacce una petición y se cierra.
+El servidor se queda esperando varias peticiones
+La ip para hacer peticiones vale localhost, un braodcast 255.255.255.255 y un broadcast de la local 192.168.1.255/24
