@@ -22,7 +22,6 @@ void ExecuteServer(int port)
 
     try
     {
-
         // Using Bind() method we associate a
         // network address to the Server Socket
         // All client that will connect to this
@@ -33,8 +32,11 @@ void ExecuteServer(int port)
         // Using Listen() method we create
         // the Client list that will want
         // to connect to Server
-        listener.Listen(10);
+        listener.Listen(10); //Longitud máxima de la cola de conexiones pendientes
 
+        int i = 0; // Un contador para enviar respuestas distintas cada petición
+
+    NewConnetion: // Uso de Etiquetas 
         while (true)
         {
 
@@ -45,24 +47,38 @@ void ExecuteServer(int port)
             // Accept() method the server
             // will accept connection of client
             Socket clientSocket = listener.Accept();
-            Console.WriteLine($"RemoteEndPoint {clientSocket.RemoteEndPoint?.ToString()}");
+            //https://learn.microsoft.com/es-es/dotnet/api/system.net.sockets.socket.ttl?view=net-6.0
+            clientSocket.ReceiveTimeout = 1000;
+
+            Console.WriteLine($"accept RemoteEndPoint {clientSocket.RemoteEndPoint?.ToString()} waiting data...");
             // Data buffer
             byte[] bytes = new Byte[1024];
             string data = "";
-
             while (true)
             {
 
-                int numByte = clientSocket.Receive(bytes);
-
-                data += Encoding.ASCII.GetString(bytes, 0, numByte);
-
-                if (data.IndexOf("<EOF>") > -1)
+                try
+                {
+                    int numByte = clientSocket.Receive(bytes);
+                    data += Encoding.ASCII.GetString(bytes, 0, numByte);
+                    Console.WriteLine("Text received -> {1} \n{0} ", data, data.Length);
+                    //if (data.IndexOf("<EOF>") > -1)
                     break;
+                }
+                catch (System.Net.Sockets.SocketException e)
+                {
+                    // Timout de clientSocket.Receive(bytes);
+                    //Console.WriteLine(e.ToString());
+                    clientSocket.Shutdown(SocketShutdown.Both);
+                    clientSocket.Close();
+                    goto NewConnetion; // Uso de GOTO!!!!🥵
+                }
+
             }
 
-            Console.WriteLine("Text received -> \n{0} ", data);
-            byte[] message = Encoding.ASCII.GetBytes("Test Server y " + data);
+            String firstLine = data.Split("\n")[0];
+
+            byte[] message = Encoding.ASCII.GetBytes("HTTP/1.1 200 OK\n\nTCP Server\n" + firstLine + $"\nResponse #{++i}");
 
             // Send a message to Client
             // using Send() method
@@ -73,9 +89,12 @@ void ExecuteServer(int port)
             // we can use the closed Socket
             // for a new Client Connection
             clientSocket.Shutdown(SocketShutdown.Both);
+
             clientSocket.Close();
+
         }
     }
+
 
     catch (Exception e)
     {

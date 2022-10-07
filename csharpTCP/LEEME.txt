@@ -1,9 +1,9 @@
-Lanzamos el servidor indocando el puerto
+Lanzamos el servidor invocando el puerto
 
 dotnet run --project servidor 11111
 
-que espera un texto que puede ser de varias linneas pero siempre acaba en <EOF>, y desconecta la sesion del cliente
-El progrma no crea hilos para tratar conecxiones permanetes.
+y  espera un texto, con un timeout de 1 sg,  que puede ser de varias lineas, y desconecta la sesión del cliente
+El programa no crea hilos para tratar las conexiones permanentes, así que se lo monta para verificar un timeout.
 
 dotnet run --project servidor 2222
 Waiting connection in port 2222 ...
@@ -14,8 +14,14 @@ Line2
 <EOF>
 Waiting connection in port 2222 ...
 
+Podemos ir a un navegador y escribir en la URL http://localhost:11111/path/to/the/resource?param1=uno&dparam2=2#anchor y ver cómo
+se puede recibir una solicitud HTTP y escribir una respuesta válida
+TCP Server
+GET /path/to/the/resource?param1=uno&dparam2=2 HTTP/1.1
+Response #6
+Se ve tambien cómo el Navegador hace una peticion a favicon
 
-
+=====
 y el cliente invocando a que servidor y puerto se conecta
 
 dotnet run --project cliente 127.0.0.1 2222

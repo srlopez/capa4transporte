@@ -49,7 +49,7 @@ void ExecuteClient(String hostIP, int port)
 
             // Creation of message that
             // we will send to Server
-            byte[] messageSent = Encoding.ASCII.GetBytes("Santi Client\nLine2\n<EOF>");
+            byte[] messageSent = Encoding.ASCII.GetBytes("Santi Client");//\nLine2\n<EOF>");
             int byteSent = sender.Send(messageSent);
 
             // Data buffer
