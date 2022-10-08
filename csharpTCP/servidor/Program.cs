@@ -54,7 +54,8 @@ void ExecuteServer(int port)
             // Data buffer
             byte[] bytes = new Byte[1024];
             string data = "";
-            while (true)
+
+            while (true) // ciclo de lectura en chuncks de 1K haste <EOF>
             {
 
                 try
@@ -62,7 +63,8 @@ void ExecuteServer(int port)
                     int numByte = clientSocket.Receive(bytes);
                     data += Encoding.ASCII.GetString(bytes, 0, numByte);
                     Console.WriteLine("Text received -> {1} \n{0} ", data, data.Length);
-                    //if (data.IndexOf("<EOF>") > -1)
+
+                    //if (data.IndexOf("<EOF>") > -1) //Nos lo saltamos, leemos hasta 1K
                     break;
                 }
                 catch (System.Net.Sockets.SocketException e)

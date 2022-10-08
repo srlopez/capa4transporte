@@ -61,7 +61,7 @@ void ExecuteClient(String hostIP, int port)
             // received, that we'll use to
             // convert them to string
             int byteRecv = sender.Receive(messageReceived);
-            Console.WriteLine("Message from Server -> {0}",
+            Console.WriteLine("Recibido:\n{0}",
                   Encoding.ASCII.GetString(messageReceived,
                                              0, byteRecv));
 
