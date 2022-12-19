@@ -5,6 +5,7 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Arrays;
 import java.text.MessageFormat;
 
  
@@ -29,11 +30,11 @@ public class Servidor {
                  
                 //Recibo el datagrama
                 socketUDP.receive(peticion);
-                System.out.println("Recibo la informacion del cliente");
+                //System.out.println("Recibo la informacion del cliente");
                  
                 //Convierto lo recibido y mostrar el mensaje
                 String mensaje = new String(peticion.getData());
-                System.out.println(mensaje);
+                System.out.println("Recibido: "+ mensaje);
  
                 //Obtengo el puerto y la direccion de origen
                 //Sino se quiere responder, no es necesario
@@ -48,8 +49,9 @@ public class Servidor {
                 DatagramPacket respuesta = new DatagramPacket(buffer, buffer.length, direccion, puertoCliente);
  
                 //Envio la información
-                System.out.println("Envio la informacion del cliente");
+                System.out.println("Envio: " + mensaje);
                 socketUDP.send(respuesta);
+                Arrays.fill(buffer, (byte)0);
                  
             }
  
