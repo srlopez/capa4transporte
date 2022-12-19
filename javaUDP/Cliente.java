@@ -6,16 +6,17 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
  
 public class Cliente {
  
     public static void main(String[] args) {
  
-        String id = "dummy";
-        // 
-        if (args.length!=0){
-            id=args[0];
-        }
+        String id = args.length>0? args[0]: "dummy";
+        String resto = args.length>1? Arrays.stream(args).skip(1).collect(Collectors.joining(" ")):"Hola Mundo";
+
         //puerto del servidor
         final int PUERTO_SERVIDOR = 5000;
         //buffer donde se almacenara los mensajes
@@ -31,7 +32,7 @@ public class Cliente {
             //Creo el socket de UDP
             DatagramSocket socketUDP = new DatagramSocket();
  
-            String mensaje = "Hola mundo desde "+id+"!";
+            String mensaje = "Mensaje de "+id+": "+resto+"!";
  
             //Convierto el mensaje a bytes
             bufferOut = mensaje.getBytes("UTF-8");
@@ -48,7 +49,7 @@ public class Cliente {
  
             //Recibo la respuesta
             socketUDP.receive(peticion);
-            System.out.println("Recibo la peticion");
+            //System.out.println("Recibo la peticion");
  
             //Cojo los datos y lo muestro
             mensaje = new String(peticion.getData());
